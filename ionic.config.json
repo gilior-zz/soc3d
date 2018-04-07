@@ -1,0 +1,8 @@
+{
+  "name": "soc3d",
+  "app_id": "89e55042",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
