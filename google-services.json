@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "661510045616",
+    "firebase_url": "https://soc3d-4809d.firebaseio.com",
+    "project_id": "soc3d-4809d",
+    "storage_bucket": "soc3d-4809d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:661510045616:android:49322b8f069d1c34",
+        "android_client_info": {
+          "package_name": "com.soc3d.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "661510045616-v07apvvpa24344f17f8jc49pg057p3kn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAeJtyvG_SQw4ILSQToY4A2DgUPyCPcO3o"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
