@@ -1,0 +1,58 @@
+<!--
+  Generated template for the MenuDetailPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{item?.name}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="my-detail">
+  <ion-row>
+    <img src="{{item?.img}}">
+  </ion-row>
+  <div class="desc">
+    {{item?.description}}
+  </div>
+  <ion-item class="my-select">
+    <ion-label>Size</ion-label>
+    <ion-select [(ngModel)]="price">
+      <ion-option value="{{item?.price1}}">small</ion-option>
+      <ion-option value="{{item?.price2}}">medium</ion-option>
+      <ion-option value="{{item?.price3}}">large</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item class="my-select">
+    <ion-label>bonus feature</ion-label>
+    <ion-select [(ngModel)]="bonusFeature">
+      <ion-option value="0">none</ion-option>
+      <ion-option value="1">shield</ion-option>
+      <ion-option value="2">support</ion-option>
+      <ion-option value="3">trainer</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-row>
+    <ion-col text-center>
+      <h3>
+        {{price|currency:'USD':true}}
+      </h3>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <button ion-button outline large (click)="addToCart()">
+        Add
+        <ion-icon name="cart"></ion-icon>
+      </button>
+    </ion-col>
+  </ion-row>
+</ion-content>

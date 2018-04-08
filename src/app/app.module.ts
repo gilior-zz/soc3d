@@ -13,7 +13,9 @@ import {UserServiceProvider} from '../providers/user-service/user-service';
 import {IonicStorageModule} from "@ionic/storage";
 import {RewardServiceProvider} from '../providers/reward-service/reward-service';
 import {RewardModalPageModule} from "../pages/reward-modal/reward-modal.module";
-import {FCM} from "@ionic-native/fcm";
+// import {FCM} from "@ionic-native/fcm";
+import { MenuServiceProvider } from '../providers/menu-service/menu-service';
+import { CartServiceProvider } from '../providers/cart-service/cart-service';
 
 
 export const firebaseConfig = {
@@ -49,7 +51,9 @@ export const firebaseConfig = {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UserServiceProvider,
     RewardServiceProvider,
-    FCM
+    // FCM,
+    MenuServiceProvider,
+    CartServiceProvider
   ]
 })
 export class AppModule {

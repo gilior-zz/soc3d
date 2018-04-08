@@ -24,11 +24,11 @@ export class HomePage implements OnInit {
   constructor(public navCtrl: NavController,
               private angularFireAuth: AngularFireAuth,
               public userServiceProvider: UserServiceProvider,
-              private  fcm: FCM) {
+              //private  fcm: FCM
+  ) {
     this.initFcm();
 
   }
-
 
 
   signOff() {
@@ -56,15 +56,16 @@ export class HomePage implements OnInit {
   }
 
   initFcm() {
-    this.fcm.onNotification().subscribe((notificationData: NotificationData) => {
-      if (notificationData.wasTapped) {
-        console.log('notificationData ', notificationData);
-        this.userServiceProvider.displayAlerts('notificationData ', notificationData)
-      }
-      else {
-        console.log('notificationData ', notificationData);
-        this.userServiceProvider.displayAlerts('notificationData ', notificationData)
-      }
-    })
+    //   this.fcm.onNotification().subscribe((notificationData: NotificationData) => {
+    //     if (notificationData.wasTapped) {
+    //       console.log('notificationData ', notificationData);
+    //       this.userServiceProvider.displayAlerts('notificationData ', notificationData)
+    //     }
+    //     else {
+    //       console.log('notificationData ', notificationData);
+    //       this.userServiceProvider.displayAlerts('notificationData ', notificationData)
+    //     }
+    //   })
+    // }
   }
 }

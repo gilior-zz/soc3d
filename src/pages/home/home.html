@@ -9,11 +9,20 @@
   </ion-toolbar>
 
   <ion-toolbar *ngIf="loggedIn" color="secondary">
+    <button ion-button icon-left outline clear small (click)="myPagePush('checkOutPage')">
+      <ion-icon name="cart"></ion-icon>
+      checkOut
+    </button>
+
     <button ion-button clear icon-left small>
       <ion-icon name="contact"></ion-icon>
       {{loggedIn}} Logged In
     </button>
-    <button ion-button outline small (click)="signOff()">Sign Out</button>
+
+    <button ion-button icon-left outline clear small (click)="signOff()">
+      <ion-icon name="close-circle"></ion-icon>
+      Sign Out
+    </button>
   </ion-toolbar>
 
 </ion-header>
@@ -22,7 +31,7 @@
   <ion-list *ngFor="let menu of menuData" no-padding>
     <ion-card>
       <img src="{{menu.pic}}">
-      <div class="card-title"  (click)="myPagePush(menu.pushPage)">{{menu.title}}</div>
+      <div class="card-title" (click)="myPagePush(menu.pushPage)">{{menu.title}}</div>
     </ion-card>
   </ion-list>
 </ion-content>
