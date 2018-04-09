@@ -7,8 +7,8 @@ export interface UserData {
   id: string
 }
 
-export interface Rewarded {
-  rewardedId: string;
+export interface Reward {
+  rewardId: string;
   amount: number
 }
 
@@ -26,7 +26,7 @@ export type MenuItem = {
 }
 
 export enum BonusFeature {
-  none, shield, support, trainer
+  no, shield, support, trainer
 }
 
 export  type Customer = {

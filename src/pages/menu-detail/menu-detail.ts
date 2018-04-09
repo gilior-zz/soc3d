@@ -19,7 +19,7 @@ import {CartServiceProvider} from "../../providers/cart-service/cart-service";
 })
 export class MenuDetailPage implements OnInit {
   price: number;
-  bonusFeature: BonusFeature = BonusFeature.none
+  bonusFeature: string = 'no';
   private item: MenuItem;
 
   constructor(public navCtrl: NavController,
@@ -37,6 +37,9 @@ export class MenuDetailPage implements OnInit {
     let id = this.navParams.get('id');
     this.menuServiceProvider.getOne(id)
       .then(item => this.item = {...item})
+      .then(() => {
+        this.price = this.item.price1
+      })
   }
 
   addToCart() {
@@ -47,7 +50,7 @@ export class MenuDetailPage implements OnInit {
     this.item = {
       ...this.item,
       price: +this.price,
-      bonusFeature: +this.bonusFeature,
+      bonusFeature:BonusFeature[this.bonusFeature] ,
       orderId: this.item.id + '-' + this.price
     }
     this.cartServiceProvider.addItem(this.item);

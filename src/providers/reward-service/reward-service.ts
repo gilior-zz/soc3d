@@ -1,6 +1,6 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {Rewarded, UserData} from "../../models";
+import {Reward, UserData} from "../../models";
 import {Storage} from "@ionic/storage";
 import {RewardModalPage} from "../../pages/reward-modal/reward-modal";
 import {ModalController} from "ionic-angular";
@@ -13,7 +13,7 @@ import {ModalController} from "ionic-angular";
 */
 @Injectable()
 export class RewardServiceProvider {
-  rewards: Rewarded[] = [];
+  rewards: Reward[] = [];
   list: number[] = [.50, .75, 1.00, 1.25, 1.50, 1.75, 2.00, .25, .50, .75];
 
   constructor(public storage: Storage,
@@ -53,20 +53,21 @@ export class RewardServiceProvider {
     }
     else {
       let chance = Math.floor(Math.random() * 100 + 1);
-      if (chance > 50) {
+      // if (chance > 50) {
+      if (true) {
         rewardsCount++;
         this.generateReward(user, rewardsCount);
         return rewardsCount;
       }
-      else return rewardsCount;
+      // else return rewardsCount;
     }
   }
 
   private generateReward(user: string, rewardsCount: number) {
     let dex = Math.floor(Math.random() * 10);
     let rewarded = this.list[dex];
-    let rewardedObj: Rewarded = {
-      rewardedId: 'REW-' + rewardsCount,
+    let rewardedObj: Reward = {
+      rewardId: 'REW-' + rewardsCount,
       amount: rewarded
     }
     this.storage.get(user + '-rewards')

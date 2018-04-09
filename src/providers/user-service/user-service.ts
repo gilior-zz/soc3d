@@ -4,7 +4,7 @@ import {AngularFireAuth} from "angularfire2/auth";
 import {AlertController} from "ionic-angular";
 import {AngularFireDatabase, FirebaseListObservable} from "angularfire2/database";
 import {Storage} from "@ionic/storage";
-import {UserData} from "../../models";
+import {Customer, UserData} from "../../models";
 import {RewardServiceProvider} from "../reward-service/reward-service";
 
 /*
@@ -127,6 +127,10 @@ export class UserServiceProvider {
             return err;
           })
       })
+  }
+
+  returnUser(): Promise<string> {
+    return Promise.resolve(this.user);
   }
 
 }

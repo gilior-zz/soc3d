@@ -13,6 +13,75 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content class="checkOut">
+  <ion-row>
+    <h1>{{customer}}</h1>
+  </ion-row>
+  <ion-row *ngFor="let item of items">
+    <ion-col col-6>
+      <h1>
+        {{item.name}} {{ item.bonusFeature}} bonusFeature
+      </h1>
+    </ion-col>
+    <ion-col col-4>
+      <h1>
+        {{item.price|currency:'USD':true}}
+      </h1>
+    </ion-col>
+    <ion-col col-2>
+      <button ion-button icon-only (click)="removeOne(item.id,item.price)">
+        <ion-icon name="remove-circle"></ion-icon>
+      </button>
+    </ion-col>
+  </ion-row>
 
+  <div *ngIf="!ordertotal">
+    <h1>
+      no items added. plz go to menu pick some
+    </h1>
+  </div>
+
+  <ion-grid>
+    <ion-row *ngIf="!discountUsed;else used" class="my-border">
+      <ion-col>
+        <h2>Total:{{ordertotal|currency:'USD':true}}</h2>
+      </ion-col>
+    </ion-row>
+
+    <ng-template #used>
+      <ion-row class="my-border">
+        <ion-col><h3>sub-total:{{ordertotal|currency:'USD':true}}</h3></ion-col>
+        <ion-col><h3>discount:{{discountAmount|currency:'USD':true}}</h3></ion-col>
+        <ion-col><h3>total:{{discountTotoal|currency:'USD':true}}</h3></ion-col>
+      </ion-row>
+    </ng-template>
+
+    <ion-row *ngIf="discountUsed">
+      <button ion-button large full outline (click)="removeReward()">
+        remove reward
+      </button>
+    </ion-row>
+  </ion-grid>
+
+  <ion-row justify-content-center class="mu-border">
+    <button ion-button large full outline (click)="addRewsrds()"></button>
+  </ion-row>
+
+  <div *ngIf="rewardsDisplay" class="rewards-div">
+    <ion-row>
+      <ion-col col-6>Reward ID</ion-col>
+      <ion-col col-4>Amount</ion-col>
+      <ion-col col-2>Apply</ion-col>
+    </ion-row>
+
+    <ion-row *ngFor="let item of rewardList">
+      <ion-col col-6>{{item.rewardId}}</ion-col>
+      <ion-col col-4>{{item.amount|currency:'USD':true}}</ion-col>
+      <ion-col col-2>
+        <button ion-button small icon-only (click)="applyReward(item)">
+          <ion-icon name="add"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+  </div>
 </ion-content>

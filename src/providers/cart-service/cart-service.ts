@@ -15,7 +15,7 @@ export class CartServiceProvider {
 
   }
 
-  getCart() {
+  getCart(): Promise<MenuItem[]> {
     return Promise.resolve(this.cart);
   }
 
