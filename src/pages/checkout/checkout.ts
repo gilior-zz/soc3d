@@ -3,6 +3,10 @@ import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {Customer, MenuItem, Reward} from "../../models";
 import {CartServiceProvider} from "../../providers/cart-service/cart-service";
 import {UserServiceProvider} from "../../providers/user-service/user-service";
+import {PayPal, PayPalConfiguration, PayPalEnvironment, PayPalPayment} from "@ionic-native/paypal";
+import {HomePage} from "../home/home";
+import {Observable} from "rxjs/Observable";
+import {fromPromise} from "rxjs/observable/fromPromise";
 
 /**
  * Generated class for the CheckoutPage page.
@@ -32,7 +36,8 @@ export class CheckoutPage implements OnInit {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public cartServiceProvider: CartServiceProvider,
-              public userServiceProvider: UserServiceProvider) {
+              public userServiceProvider: UserServiceProvider,
+              private payPal: PayPal) {
   }
 
   ngOnInit(): void {
@@ -95,4 +100,49 @@ export class CheckoutPage implements OnInit {
     this.discount = null;
   }
 
+  puchase() {
+    if (this.discountUsed) {
+      let tmpId = this.discount.rewardId;
+      let tmp = this.rewardList.map(i => i.rewardId).indexOf(tmpId);
+      if (tmp > -1)
+        this.rewardList.splice(tmp, 1);
+      this.userServiceProvider.storageControl('set', `${this.customer}-rewards`)
+        .then(res => console.log('saved ', res));
+      this.payCart();
+      this.cartServiceProvider.emptyCart();
+      this.userServiceProvider.displayAlerts('tnx', `u paid us ${this.ordertotal}`)
+      this.navCtrl.push(HomePage);
+    }
+    else {
+      this.payCart();
+      this.cartServiceProvider.emptyCart();
+      this.userServiceProvider.displayAlerts('tnx', `u paid us ${this.ordertotal}`)
+      this.navCtrl.push(HomePage);
+    }
+  }
+
+
+  private payCart() {
+    let obj: PayPalEnvironment = {
+      PayPalEnvironmentProduction: 'foo',
+      PayPalEnvironmentSandbox: 'AbuWU_rZ-nklShzECWO8yhJBco0XZjibwLg7vPV5TqXPiKTlTWb77OwOpEOyd9dzGTIAmn-bgMkZ2cHh'
+    }
+    let obs = fromPromise(this.payPal.init(obj));
+    obs.subscribe(() => {
+      this.payPal.prepareToRender('PayPalEnvironmentSandBox', new PayPalConfiguration({}))
+        .then(() => {
+          let payment = new PayPalPayment(String(this.ordertotal), 'USD', 'desc', 'sale');
+          this.payPal.renderSinglePaymentUI(payment)
+            .then((res => {
+              console.log('res from pay pal ', res);
+            }), (err) => {
+              console.log('payment err ', err)
+            })
+        }, (err) => {
+          console.log('conf err', err)
+        })
+    }, (err) => {
+      console.log('init err ', err);
+    })
+  }
 }

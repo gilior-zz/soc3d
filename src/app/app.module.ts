@@ -16,6 +16,7 @@ import {RewardModalPageModule} from "../pages/reward-modal/reward-modal.module";
 // import {FCM} from "@ionic-native/fcm";
 import { MenuServiceProvider } from '../providers/menu-service/menu-service';
 import { CartServiceProvider } from '../providers/cart-service/cart-service';
+import {PayPal} from "@ionic-native/paypal";
 
 
 export const firebaseConfig = {
@@ -51,6 +52,7 @@ export const firebaseConfig = {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UserServiceProvider,
     RewardServiceProvider,
+    PayPal,
     // FCM,
     MenuServiceProvider,
     CartServiceProvider

@@ -30,4 +30,8 @@ export class CartServiceProvider {
 
   }
 
+  emptyCart(){
+    this.cart.slice(0,0);
+  }
+
 }
