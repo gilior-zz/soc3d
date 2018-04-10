@@ -37,10 +37,13 @@ export class CheckoutPage implements OnInit {
 
   ngOnInit(): void {
     this.userServiceProvider.user = this.customer;
+
     this.cartServiceProvider.getCart()
       .then(cart => this.items = cart)
       .then(cart => this.sumTotal())
-      .then(sum => this.ordertotal = sum);
+      .then(sum => this.ordertotal = sum)
+      .then(cash => this.userServiceProvider.returnUser())
+      .then(cust => this.loadRewards(cust));
   }
 
   ionViewDidLoad() {
@@ -58,7 +61,7 @@ export class CheckoutPage implements OnInit {
   }
 
   addRewsrds() {
-    this.rewardsDisplay != this.rewardsDisplay;
+    this.rewardsDisplay = !this.rewardsDisplay;
   }
 
   loadRewards(user: string) {
